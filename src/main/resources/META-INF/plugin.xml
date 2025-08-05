@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idea-plugin>
-    <id>com.dbfg.dart-barrel-file-generator</id>
-    <name>Dart Barrel File Generator</name>
-    <vendor email="contato@dbfg.com" url="https://github.com/dbfg">Dart Barrel File Generator Team</vendor>
+    <id>com.dbfg.dart-barrel-generator</id>
+    <name>Dart Barrel Generator</name>
+    <vendor email="contato@dbfg.com" url="https://github.com/dbfg">Dart Barrel Generator Team</vendor>
     <idea-version since-build="233" until-build="252.*"/>
+    
+    <icon path="/icons/pluginIcon.svg"/>
 
     <description><![CDATA[
     <h2>Plugin to generate barrel files for Dart and Flutter projects</h2>
@@ -45,16 +47,16 @@
         <applicationService serviceImplementation="com.dbfg.settings.DartBarrelSettings"/>
         <applicationConfigurable parentId="tools" instance="com.dbfg.settings.DartBarrelSettingsConfigurable"
                              id="com.dbfg.settings.DartBarrelSettingsConfigurable"
-                             displayName="Dart Barrel File Generator"/>
+                             displayName="Dart Barrel Generator"/>
         
         <!-- Notification group -->
-        <notificationGroup id="Dart Barrel File Generator" displayType="BALLOON" toolWindowId="Project"/>
+        <notificationGroup id="Dart Barrel Generator" displayType="BALLOON" toolWindowId="Project"/>
     </extensions>
 
     <actions>
         <!-- Context menu actions -->
         <group id="DartBarrelFileGenerator.ActionGroup" 
-               text="Dart Barrel File Generator" 
+               text="Dart Barrel Generator" 
                description="Generate barrel files for Dart"
                popup="true">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>

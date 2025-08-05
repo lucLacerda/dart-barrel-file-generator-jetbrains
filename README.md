@@ -1,4 +1,4 @@
-# Dart Barrel File Generator for JetBrains IDEs
+# Dart Barrel Generator for JetBrains IDEs
 
 Plugin for JetBrains IDEs (IntelliJ IDEA, WebStorm, Android Studio) that generates barrel files for Dart and Flutter projects.
 
@@ -16,20 +16,20 @@ In Dart (and other languages), a barrel file is a file that re-exports several o
 
 1. Open your JetBrains IDE (IntelliJ IDEA, WebStorm, Android Studio)
 2. Go to `Settings/Preferences > Plugins > Marketplace`
-3. Search for "Dart Barrel File Generator"
+3. Search for "Dart Barrel Generator"
 4. Click "Install"
 5. Restart the IDE when prompted
 
 ## How to use
 1. Right-click on a folder in the Project Explorer
-2. Select "Dart Barrel File Generator" from the context menu
+2. Select "Dart Barrel Generator" from the context menu
 3. Choose one of the options:
    - **Generate Barrel for This Folder**: Creates a barrel file only for the selected folder
    - **Generate Barrel Recursive**: Creates barrel files for the selected folder and all its subfolders
    - **Generate Barrel with Subfolders**: Creates a barrel file including all files from subfolders
 
 ## Settings
-Access the plugin settings in `Settings/Preferences > Tools > Dart Barrel File Generator`.
+Access the plugin settings in `Settings/Preferences > Tools > Dart Barrel Generator`.
 
 ### Available options:
 
@@ -64,10 +64,6 @@ This plugin was developed in Kotlin for JetBrains IDEs, based on the functionali
 ```bash
 ./gradlew runIde
 ```
-
-## License
-
-This project is licensed under the same license as the original project: [LICENSE](LICENSE)
 
 ## Credits
 

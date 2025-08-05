@@ -44,8 +44,8 @@ intellijPlatform {
             untilBuild = "251.*"
         }
 
-//        pluginId = "com.dbfg.dart-barrel-file-generator"
-        name = "Dart Barrel File Generator"
+        // O pluginId é definido no plugin.xml
+        name = "Dart Barrel Generator"
         description = """Plugin to generate barrel files in Dart and Flutter projects, simplifying the organization and import of multiple files.""".trimIndent()
 
         changeNotes = """
@@ -75,6 +75,10 @@ tasks {
     }
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
+    }
+    
+    buildPlugin {
+        archiveBaseName.set("dart-barrel-generator")
     }
 
     signPlugin {
