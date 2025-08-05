@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>com.dbfg.dart-barrel-file-generator</id>
+    <name>Dart Barrel File Generator</name>
+    <vendor email="contato@dbfg.com" url="https://github.com/dbfg">Dart Barrel File Generator Team</vendor>
+    <idea-version since-build="233" until-build="252.*"/>
+
+    <description><![CDATA[
+    <h2>Plugin to generate barrel files for Dart and Flutter projects</h2>
+    <p>Allows you to create barrel files to export multiple Dart files through a single import, simplifying code organization and improving readability.</p>
+    
+    <h3>What are barrel files?</h3>
+    <p>In Dart, a barrel file is a file that re-exports several other files from a directory, allowing you to import multiple files through a single import.</p>
+    
+    <p><b>Without barrel file:</b></p>
+    <pre>
+    import 'package:my_app/widgets/button.dart';
+    import 'package:my_app/widgets/card.dart';
+    import 'package:my_app/widgets/text.dart';
+    </pre>
+    
+    <p><b>With barrel file:</b></p>
+    <pre>
+    import 'package:my_app/widgets/widgets.dart'; // Imports all widgets at once
+    </pre>
+    
+    <h3>Features:</h3>
+    <ul>
+      <li><b>Simple generation:</b> Create barrel files for any folder in your project with just a few clicks</li>
+      <li><b>Recursive generation:</b> Generate barrel files for a folder and all its subfolders automatically</li>
+      <li><b>Generation with subfolders:</b> Create a single barrel file that includes exports from subfolders</li>
+      <li><b>Customization:</b> Configure barrel file names, exclusion patterns, and export formats</li>
+      <li><b>Detailed statistics:</b> View statistics about processed and exported files</li>
+      <li><b>Configurable exclusions:</b> Define glob patterns to exclude specific files and directories</li>
+      <li><b>Advanced options:</b> Customize the export format with prefix/suffix and package: support</li>
+    </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+<!--    <depends>Dart</depends>-->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Configurações persistentes -->
+        <applicationService serviceImplementation="com.dbfg.settings.DartBarrelSettings"/>
+        <applicationConfigurable parentId="tools" instance="com.dbfg.settings.DartBarrelSettingsConfigurable"
+                             id="com.dbfg.settings.DartBarrelSettingsConfigurable"
+                             displayName="Dart Barrel File Generator"/>
+        
+        <!-- Notification group -->
+        <notificationGroup id="Dart Barrel File Generator" displayType="BALLOON" toolWindowId="Project"/>
+    </extensions>
+
+    <actions>
+        <!-- Context menu actions -->
+        <group id="DartBarrelFileGenerator.ActionGroup" 
+               text="Dart Barrel File Generator" 
+               description="Generate barrel files for Dart"
+               popup="true">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="WeighingNewGroup"/>
+
+            <action id="DartBarrelFileGenerator.FoldersRecursive"
+                    class="com.dbfg.actions.GenerateBarrelRecursiveAction"
+                    text="Generate Barrel Recursive (Best Option)"
+                    description="Generates barrel files for the selected folder and all its subfolders">
+            </action>
+
+            <action id="DartBarrelFileGenerator.ThisFolder"
+                    class="com.dbfg.actions.GenerateBarrelForFolderAction"
+                    text="Generate Barrel for This Folder"
+                    description="Generates a barrel file for the selected folder">
+            </action>
+            
+            <action id="DartBarrelFileGenerator.FoldersFilesRecursive"
+                    class="com.dbfg.actions.GenerateBarrelWithSubfoldersAction"
+                    text="Generate Barrel with Subfolders"
+                    description="Generates a barrel file including all files from subfolders">
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
