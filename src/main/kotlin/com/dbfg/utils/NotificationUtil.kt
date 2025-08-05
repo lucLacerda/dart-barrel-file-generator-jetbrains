@@ -3,6 +3,7 @@ package com.dbfg.utils
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
+import java.io.IOException
 
 /**
  * Utility for displaying notifications to the user.
@@ -63,9 +64,21 @@ object NotificationUtil {
      * @param type Tipo da notificação
      */
     private fun notify(project: Project, title: String, content: String, type: NotificationType) {
-        NotificationGroupManager.getInstance()
-            .getNotificationGroup(GROUP_ID)
-            .createNotification(title, content, type)
-            .notify(project)
+        try {
+            val notificationGroup = NotificationGroupManager.getInstance()
+                .getNotificationGroup(GROUP_ID)
+            
+            if (notificationGroup != null) {
+                notificationGroup
+                    .createNotification(title, content, type)
+                    .notify(project)
+            } else {
+                NotificationGroupManager.getInstance()
+                    .getNotificationGroup("IDE and Plugin Errors")
+                    ?.createNotification(title, content, type)
+                    ?.notify(project)
+            }
+        } catch (e: Exception) {
+        }
     }
 }

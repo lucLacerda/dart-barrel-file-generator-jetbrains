@@ -22,7 +22,7 @@ class DartBarrelSettings : PersistentStateComponent<DartBarrelSettings> {
     var defaultBarrelName: String? = null
     
     // Skip empty folders when generating barrel files recursively
-    var skipEmpty: Boolean = true
+    var skipEmpty: Boolean = false
 
     // Exclude .freezed.dart files
     var excludeFreezed: Boolean = true

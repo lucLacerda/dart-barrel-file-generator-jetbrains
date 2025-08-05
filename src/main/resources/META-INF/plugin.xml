@@ -2,10 +2,8 @@
 <idea-plugin>
     <id>com.dbfg.dart-barrel-generator</id>
     <name>Dart Barrel Generator</name>
-    <vendor email="contato@dbfg.com" url="https://github.com/dbfg">Dart Barrel Generator Team</vendor>
+    <vendor url="https://github.com/lucLacerda/dart-barrel-file-generator-jetbrains">Dart Barrel Generator Team</vendor>
     <idea-version since-build="233" until-build="252.*"/>
-    
-    <icon path="/icons/pluginIcon.svg"/>
 
     <description><![CDATA[
     <h2>Plugin to generate barrel files for Dart and Flutter projects</h2>
@@ -50,7 +48,7 @@
                              displayName="Dart Barrel Generator"/>
         
         <!-- Notification group -->
-        <notificationGroup id="Dart Barrel Generator" displayType="BALLOON" toolWindowId="Project"/>
+        <notificationGroup id="Dart Barrel Generator" displayType="BALLOON"/>
     </extensions>
 
     <actions>
