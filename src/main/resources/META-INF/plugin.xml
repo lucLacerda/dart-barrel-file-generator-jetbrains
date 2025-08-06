@@ -2,7 +2,7 @@
 <idea-plugin>
     <id>com.dbfg.dart-barrel-generator</id>
     <name>Dart Barrel Generator</name>
-    <vendor url="https://github.com/lucLacerda/dart-barrel-file-generator-jetbrains">Dart Barrel Generator Team</vendor>
+    <vendor url="https://github.com/lucLacerda/">lucLacerda</vendor>
     <idea-version since-build="233" until-build="252.*"/>
 
     <description><![CDATA[

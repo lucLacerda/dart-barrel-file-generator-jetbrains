@@ -154,7 +154,19 @@ abstract class BaseBarrelAction : AnAction() {
             
             // Use runWriteAction to modify the VFS
             runWriteAction {
-                val barrelFile = directory.findChild(barrelFileName) ?: directory.createChildData(this, barrelFileName)
+                val existingFile = directory.findChild(barrelFileName)
+                
+                // Verificar se o arquivo já existe e se não é um barrel
+                if (existingFile != null && !isExistingFileABarrel(existingFile)) {
+                    NotificationUtil.showError(
+                        project,
+                        "Dart Barrel Generator - Error",
+                        "Cannot create barrel file '$barrelFileName' because a non-barrel file with the same name already exists in ${directory.path}"
+                    )
+                    return@runWriteAction
+                }
+                
+                val barrelFile = existingFile ?: directory.createChildData(this, barrelFileName)
                 barrelFile.setBinaryContent(content.toByteArray())
             }
             
@@ -169,6 +181,34 @@ abstract class BaseBarrelAction : AnAction() {
                 "Error",
                 "Error creating barrel file: ${e.message}"
             )
+        }
+    }
+
+    /**
+     * Verifica se um arquivo existente é um barrel.
+     * Um arquivo é considerado barrel se:
+     * 1. Contém apenas declarações export
+     * 2. Não contém classes, funções, variáveis ou outros códigos Dart
+     */
+    private fun isExistingFileABarrel(file: VirtualFile): Boolean {
+        try {
+            val content = String(file.contentsToByteArray())
+            val lines = content.lines()
+                .map { it.trim() }
+                .filter { it.isNotEmpty() && !it.startsWith("//") && !it.startsWith("/*") && !it.startsWith("*") }
+            
+            // Se o arquivo está vazio ou só tem comentários, pode ser sobrescrito
+            if (lines.isEmpty()) {
+                return true
+            }
+            
+            // Verificar se todas as linhas não-vazias são exports
+            return lines.all { line ->
+                line.startsWith("export ") && line.endsWith(";")
+            }
+        } catch (e: Exception) {
+            // Em caso de erro ao ler o arquivo, assumir que não é um barrel para segurança
+            return false
         }
     }
 
